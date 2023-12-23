@@ -4,11 +4,12 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Check out repository code
+      uses: actions/checkout@v4
     - name: Render terraform docs inside the README.md and push changes back to PR branch
       uses: terraform-docs/gh-actions@v1.0.0
       with:
-        working-dir: .
+        working-dir: ${{ github.workspace }}
         output-file: README.md
         output-method: inject
         git-push: "true"
