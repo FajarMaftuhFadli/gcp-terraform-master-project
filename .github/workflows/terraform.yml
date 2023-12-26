@@ -15,7 +15,7 @@ on:
         default: true
       operation:
         type: choice
-        description: Operation 1
+        description: Operation
         options:
         - None
         - Plan
