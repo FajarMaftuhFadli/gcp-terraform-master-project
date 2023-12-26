@@ -32,9 +32,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         sparse-checkout: src
-    - name: Copy codes to the current directory
-      run: cp -r src/* .
-    - run: ls
+    - name: Move codes to the current directory
+      run: mv src/* .
     - name: Cache plugin dir
       uses: actions/cache@v3
       with:
@@ -66,6 +65,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         sparse-checkout: src
+    - name: Move codes to the current directory
+      run: mv src/* .
     - name: Authenticate with Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
