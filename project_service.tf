@@ -12,7 +12,7 @@ resource "google_project_service" "serviceusage-googleapis-com" {
   disable_dependent_services = true
 }
 
-resource "google_project_service" "serviceusage-googleapis-com" {
+resource "google_project_service" "cloudaicompanion-googleapis-com" {
   project = google_project.master.project_id
   service = "cloudaicompanion.googleapis.com"
 
