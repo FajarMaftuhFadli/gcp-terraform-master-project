@@ -30,12 +30,10 @@ jobs:
     steps:
     - name: Checkout source code
       uses: actions/checkout@v4
-    - name: Change to src directory
-      run: pwd
-    - name: Change to src directory
-      run: cd src
-    - name: Change to src directory
-      run: pwd
+      with:
+        sparse-checkout: src
+    - run: pwd
+    - run: ls
     - name: Cache plugin dir
       uses: actions/cache@v3
       with:
@@ -65,8 +63,8 @@ jobs:
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
-    - name: Change to src directory
-      run: cd src
+      with:
+        sparse-checkout: src
     - name: Authenticate with Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
