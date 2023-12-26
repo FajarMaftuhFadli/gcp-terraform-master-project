@@ -53,13 +53,13 @@ jobs:
       with:
         tflint_version: latest
     - name: Show version
-      run: tflint --chdir=$TF_DIR --recursive --version
+      run: tflint --chdir=$TF_DIR --version
     - name: Init TFLint
-      run: tflint --chdir=$TF_DIR --recursive --init
+      run: tflint --chdir=$TF_DIR --init
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: Run TFLint
-      run: tflint --chdir=$TF_DIR --recursive -f compact
+      run: tflint --chdir=$TF_DIR -f compact
 
   Terraforming:
     runs-on: ubuntu-latest
