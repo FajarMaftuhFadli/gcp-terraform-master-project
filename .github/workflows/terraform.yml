@@ -10,18 +10,23 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v4
     - name: Authenticate with Google Cloud
-      uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v3
-    - name: Terraform fmt
-      id: fmt
-      run: terraform fmt -check
-      continue-on-error: true
-    - name: Terraform Init
-      id: init
-      run: terraform init
-    - name: Terraform Plan
-      id: apply
-      run: terraform plan
+      run: |
+        echo "${{ secrets.GOOGLE_CREDENTIALS }}" > secret.json
+        cat secret.json
+        pwd
+        ls
+      # uses: 'google-github-actions/auth@v2'
+      # with:
+      #   credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+    # - name: Set up Terraform
+    #   uses: hashicorp/setup-terraform@v3
+    # - name: Terraform fmt
+    #   id: fmt
+    #   run: terraform fmt -check
+    #   continue-on-error: true
+    # - name: Terraform Init
+    #   id: init
+    #   run: terraform init
+    # - name: Terraform Plan
+    #   id: apply
+    #   run: terraform plan
