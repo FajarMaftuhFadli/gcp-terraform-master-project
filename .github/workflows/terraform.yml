@@ -1,7 +1,5 @@
 name: Terraform
 on:
-  pull_request:
-    branches: main
   push:
     branches: main
   workflow_dispatch:
@@ -29,11 +27,11 @@ jobs:
       run: terraform init
     - name: Terraform Plan
       id: plan
-      if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: terraform plan
     - name: Terraform Apply
       id: apply
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      if: github.event_name == 'workflow_dispatch'
       run: terraform apply
     - name: Terraform Show
       id: show
