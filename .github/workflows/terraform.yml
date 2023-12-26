@@ -95,11 +95,11 @@ jobs:
     - name: Terraform Apply
       id: apply
       if: github.event.inputs.operation == 'Apply'
-      run: terraform apply
+      run: terraform apply -auto-approve
     - name: Terraform Destroy
       id: destroy
       if: github.event.inputs.operation == 'Destroy'
-      run: terraform destroy
+      run: terraform destroy -auto-approve
     - name: Terraform Show
       if: github.event.inputs.use-show
       id: show
