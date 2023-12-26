@@ -64,7 +64,7 @@ jobs:
   Terraforming:
     runs-on: ubuntu-latest
     needs: TFLint
-    if: github.event.inputs.operation != 'None'
+    if: github.event.inputs.operation != 'None' || github.event.inputs.use-show || github.event.inputs.use-output
     env:
       TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
       TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
@@ -90,7 +90,7 @@ jobs:
       run: terraform init
     - name: Terraform Plan
       id: plan
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event.inputs.operation == 'Plan'
+      if: github.event_name == 'push' || github.event.inputs.operation == 'Plan'
       run: terraform plan
     - name: Terraform Apply
       id: apply
