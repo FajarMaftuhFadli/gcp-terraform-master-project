@@ -1,11 +1,9 @@
 name: Terraform
 on: [push]
 jobs:
-  terraform:
+
+  Setup:
     runs-on: ubuntu-latest
-    env:
-      TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
-      TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
@@ -13,6 +11,13 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+  Terraform:
+    runs-on: ubuntu-latest
+    env:
+      TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
+      TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
+    steps:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
     - name: Terraform fmt
