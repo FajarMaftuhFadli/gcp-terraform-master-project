@@ -18,6 +18,8 @@ jobs:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
+    - name: Cache Terraform provider
+      uses: terraform-cache/terraform-cache@v1
     - name: Terraform fmt
       id: fmt
       run: terraform fmt -check
