@@ -19,7 +19,7 @@ on:
         - Destroy
       use-lint:
         type: boolean
-        description: Use linter?
+        description: Use linter
         default: true
 
 jobs:
