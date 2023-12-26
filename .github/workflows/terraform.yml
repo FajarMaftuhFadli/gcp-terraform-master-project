@@ -35,7 +35,7 @@ env:
 
 jobs:
 
-  TFLint:
+  Linting:
     runs-on: ubuntu-latest
     if: github.event.inputs.use-lint
     steps:
@@ -63,7 +63,7 @@ jobs:
 
   Terraforming:
     runs-on: ubuntu-latest
-    needs: TFLint
+    needs: Linting
     if: github.event.inputs.operation != 'None' || github.event.inputs.use-show || github.event.inputs.use-output
     env:
       TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
