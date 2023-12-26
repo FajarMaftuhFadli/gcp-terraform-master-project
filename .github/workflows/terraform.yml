@@ -9,15 +9,11 @@ on:
 
   workflow_dispatch:
     inputs:
-      use-lint:
-        type: boolean
-        description: Use linter
-        default: false
       operation:
         type: choice
         description: Operation
         options:
-        - None
+        - Linting
         - Plan
         - Apply
         - Destroy
@@ -37,7 +33,7 @@ jobs:
 
   Linting:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event.inputs.use-lint
+    if: github.event_name == 'push' || github.event.inputs.operation == 'Linting'
     steps:
     - name: Checkout source code
       uses: actions/checkout@v4
@@ -63,8 +59,7 @@ jobs:
 
   Terraforming:
     runs-on: ubuntu-latest
-    needs: Linting
-    if: github.event_name == 'push' || github.event.inputs.operation != 'None' || github.event.inputs.use-show || github.event.inputs.use-output
+    if: github.event.inputs.operation != 'Linting' || github.event.inputs.use-show || github.event.inputs.use-output
     env:
       TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
       TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
@@ -86,7 +81,7 @@ jobs:
     - name: Terraform Init
       run: terraform -chdir=$TF_DIR init
     - name: Terraform Plan
-      if: github.event_name == 'push' || github.event.inputs.operation == 'Plan'
+      if: github.event.inputs.operation == 'Plan'
       run: terraform -chdir=$TF_DIR plan
     - name: Terraform Apply
       if: github.event.inputs.operation == 'Apply'
