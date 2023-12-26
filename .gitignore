@@ -36,3 +36,4 @@ terraform.rc
 # Custom
 .terraform/
 *.lock.hcl
+*.json
