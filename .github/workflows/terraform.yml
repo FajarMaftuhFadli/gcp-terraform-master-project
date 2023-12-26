@@ -23,7 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout source code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+    - name: Change to src directory
+      run: cd src
     - name: Cache plugin dir
       uses: actions/cache@v3
       with:
@@ -52,6 +54,8 @@ jobs:
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
+    - name: Change to src directory
+      run: cd src
     - name: Authenticate with Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
