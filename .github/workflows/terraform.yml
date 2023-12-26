@@ -3,6 +3,9 @@ on: [push]
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
+      TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
