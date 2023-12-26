@@ -31,7 +31,8 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v4
       with:
-        sparse-checkout: src/**
+        sparse-checkout: src
+        path: hellooooooo
     - run: pwd
     - run: ls
     - name: Cache plugin dir
