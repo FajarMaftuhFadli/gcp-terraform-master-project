@@ -13,14 +13,20 @@ on:
         type: choice
         description: Operation
         options:
+        - None
         - Plan
         - Apply
         - Destroy
+      use-lint:
+        type: boolean
+        description: Use linter?
+        default: true
 
 jobs:
 
   TFLint:
     runs-on: ubuntu-latest
+    if: github.event.inputs.use-lint
     steps:
     - name: Checkout source code
       uses: actions/checkout@v4
@@ -52,6 +58,7 @@ jobs:
   Terraforming:
     runs-on: ubuntu-latest
     needs: TFLint
+    if: github.event.inputs.operation != 'None'
     env:
       TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
       TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
