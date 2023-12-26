@@ -25,7 +25,11 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v4
     - name: Change to src directory
+      run: pwd
+    - name: Change to src directory
       run: cd src
+    - name: Change to src directory
+      run: pwd
     - name: Cache plugin dir
       uses: actions/cache@v3
       with:
