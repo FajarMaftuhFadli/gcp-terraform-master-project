@@ -12,7 +12,7 @@ on:
       use-lint:
         type: boolean
         description: Use linter
-        default: true
+        default: false
       operation:
         type: choice
         description: Operation
