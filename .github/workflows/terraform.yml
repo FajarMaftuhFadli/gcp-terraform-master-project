@@ -9,18 +9,26 @@ on:
 
   workflow_dispatch:
     inputs:
+      use-lint:
+        type: boolean
+        description: Use linter
+        default: true
       operation:
         type: choice
-        description: Operation
+        description: Operation 1
         options:
         - None
         - Plan
         - Apply
         - Destroy
-      use-lint:
+      use-show:
         type: boolean
-        description: Use linter
-        default: true
+        description: terraform show
+        default: false
+      use-output:
+        type: boolean
+        description: terraform output
+        default: false
 
 jobs:
 
@@ -93,5 +101,10 @@ jobs:
       if: github.event.inputs.operation == 'Destroy'
       run: terraform destroy
     - name: Terraform Show
+      if: github.event.inputs.use-show
       id: show
       run: terraform show
+    - name: Terraform Output
+      if: github.event.inputs.use-output
+      id: output
+      run: terraform output
