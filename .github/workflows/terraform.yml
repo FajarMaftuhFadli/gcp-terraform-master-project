@@ -30,6 +30,9 @@ on:
         description: terraform output
         default: false
 
+env:
+  TF_DIR: 'src'
+
 jobs:
 
   TFLint:
@@ -40,8 +43,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         sparse-checkout: src
-    - name: Move codes to the current directory
-      run: mv src/* .
     - name: Cache plugin dir
       uses: actions/cache@v3
       with:
@@ -52,14 +53,13 @@ jobs:
       with:
         tflint_version: latest
     - name: Show version
-      run: tflint --version
+      run: tflint --chdir=$TF_DIR --recursive --version
     - name: Init TFLint
-      run: tflint --init
+      run: tflint --chdir=$TF_DIR --recursive --init
       env:
-        # https://github.com/terraform-linters/tflint/blob/master/docs/user-guide/plugins.md#avoiding-rate-limiting
         GITHUB_TOKEN: ${{ github.token }}
     - name: Run TFLint
-      run: tflint -f compact
+      run: tflint --chdir=$TF_DIR --recursive -f compact
 
   Terraforming:
     runs-on: ubuntu-latest
@@ -73,8 +73,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         sparse-checkout: src
-    - name: Move codes to the current directory
-      run: mv src/* .
     - name: Authenticate with Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
@@ -87,24 +85,24 @@ jobs:
       uses: terraform-cache/terraform-cache@v1
     - name: Terraform Init
       id: init
-      run: terraform init
+      run: terraform -chdir=$TF_DIR init
     - name: Terraform Plan
       id: plan
       if: github.event_name == 'push' || github.event.inputs.operation == 'Plan'
-      run: terraform plan
+      run: terraform -chdir=$TF_DIR plan
     - name: Terraform Apply
       id: apply
       if: github.event.inputs.operation == 'Apply'
-      run: terraform apply -auto-approve
+      run: terraform -chdir=$TF_DIR apply -auto-approve
     - name: Terraform Destroy
       id: destroy
       if: github.event.inputs.operation == 'Destroy'
-      run: terraform destroy -auto-approve
+      run: terraform -chdir=$TF_DIR destroy -auto-approve
     - name: Terraform Show
       if: github.event.inputs.use-show
       id: show
-      run: terraform show
+      run: terraform -chdir=$TF_DIR show
     - name: Terraform Output
       if: github.event.inputs.use-output
       id: output
-      run: terraform output
+      run: terraform -chdir=$TF_DIR output
