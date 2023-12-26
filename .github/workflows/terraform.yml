@@ -29,7 +29,7 @@ jobs:
       run: terraform init
     - name: Terraform Plan
       id: plan
-      if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main'
+      if: github.event_name == 'pull_request' && github.ref == 'refs/heads/dev'
       run: terraform plan
     - name: Terraform Apply
       id: apply
