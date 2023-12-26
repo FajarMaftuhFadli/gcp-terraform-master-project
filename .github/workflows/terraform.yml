@@ -84,25 +84,19 @@ jobs:
     - name: Cache Terraform provider
       uses: terraform-cache/terraform-cache@v1
     - name: Terraform Init
-      id: init
       run: terraform -chdir=$TF_DIR init
     - name: Terraform Plan
-      id: plan
       if: github.event_name == 'push' || github.event.inputs.operation == 'Plan'
       run: terraform -chdir=$TF_DIR plan
     - name: Terraform Apply
-      id: apply
       if: github.event.inputs.operation == 'Apply'
       run: terraform -chdir=$TF_DIR apply -auto-approve
     - name: Terraform Destroy
-      id: destroy
       if: github.event.inputs.operation == 'Destroy'
       run: terraform -chdir=$TF_DIR destroy -auto-approve
     - name: Terraform Show
       if: github.event.inputs.use-show
-      id: show
       run: terraform -chdir=$TF_DIR show
     - name: Terraform Output
       if: github.event.inputs.use-output
-      id: output
       run: terraform -chdir=$TF_DIR output
