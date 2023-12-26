@@ -32,8 +32,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         sparse-checkout: src
-        path: hellooooooo
-    - run: pwd
+    - name: Copy codes to the current directory
+      run: cp -r src/* .
     - run: ls
     - name: Cache plugin dir
       uses: actions/cache@v3
