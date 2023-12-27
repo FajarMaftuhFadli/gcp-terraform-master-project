@@ -5,6 +5,7 @@ on:
     paths:
       - '**.tf'
   workflow_dispatch:
+  workflow_call:
 env:
   TF_DIR: 'src'
 jobs:
