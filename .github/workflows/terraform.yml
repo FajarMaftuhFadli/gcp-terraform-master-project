@@ -18,6 +18,7 @@ on:
         type: boolean
         description: terraform output
         default: false
+  workflow_call:
 env:
   TF_DIR: 'src'
 jobs:
