@@ -1,19 +1,11 @@
 name: Terraform
-
 on:
-
-  push:
-    branches: main
-    paths:
-      - '**.tf'
-
   workflow_dispatch:
     inputs:
       operation:
         type: choice
         description: Operation
         options:
-        - Linting
         - Plan
         - Apply
         - Destroy
@@ -25,41 +17,11 @@ on:
         type: boolean
         description: terraform output
         default: false
-
 env:
   TF_DIR: 'src'
-
 jobs:
-
-  Linting:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event.inputs.operation == 'Linting'
-    steps:
-    - name: Checkout source code
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: src
-    - name: Cache plugin dir
-      uses: actions/cache@v3
-      with:
-        path: ~/.tflint.d/plugins
-        key: ubuntu-latest-tflint-${{ hashFiles('.tflint.hcl') }}
-    - name: Setup TFLint
-      uses: terraform-linters/setup-tflint@v3
-      with:
-        tflint_version: latest
-    - name: Show version
-      run: tflint --chdir=$TF_DIR --version
-    - name: Init TFLint
-      run: tflint --chdir=$TF_DIR --init
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-    - name: Run TFLint
-      run: tflint --chdir=$TF_DIR -f compact
-
   Terraforming:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.operation != 'Linting' || github.event.inputs.use-show || github.event.inputs.use-output
     env:
       TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
       TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
