@@ -59,7 +59,7 @@ jobs:
 
   Terraforming:
     runs-on: ubuntu-latest
-    if: github.event_name != 'push' || github.event.inputs.operation != 'Linting' || github.event.inputs.use-show || github.event.inputs.use-output
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.operation != 'Linting' || github.event.inputs.use-show || github.event.inputs.use-output
     env:
       TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
       TF_VAR_org_id: '${{ secrets.TF_VAR_org_id }}'
