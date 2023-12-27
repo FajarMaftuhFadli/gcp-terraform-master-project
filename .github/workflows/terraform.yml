@@ -53,8 +53,8 @@ jobs:
       if: github.event.inputs.operation == 'Destroy'
       run: terraform -chdir=$TF_DIR destroy -auto-approve
     - name: Terraform Show
-      if: github.event.inputs.use-show
+      if: github.event.inputs.use-show == true
       run: terraform -chdir=$TF_DIR show
     - name: Terraform Output
-      if: github.event.inputs.use-output
+      if: github.event.inputs.use-output == true
       run: terraform -chdir=$TF_DIR output
