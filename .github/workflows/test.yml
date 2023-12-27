@@ -1,0 +1,25 @@
+name: Terraform
+on:
+  workflow_dispatch:
+    # inputs:
+    #   operation:
+    #     type: choice
+    #     description: Operation
+    #     options:
+    #     - None
+    #     - Plan
+    #     - Apply
+    #     - Destroy
+    #   use-show:
+    #     type: boolean
+    #     description: terraform show
+    #     default: false
+    #   use-output:
+    #     type: boolean
+    #     description: terraform output
+    #     default: false
+env:
+  TF_DIR: 'src'
+jobs:
+  Terraforming:
+    uses: fajarmaftuhfadli/github-actions/terraform/tflint.yml@main
