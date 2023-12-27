@@ -22,4 +22,4 @@ env:
   TF_DIR: 'src'
 jobs:
   Terraforming:
-    uses: fajarmaftuhfadli/github-actions/terraform/tflint.yml@main
+    uses: fajarmaftuhfadli/github-actions/.github/workflows/tflint.yml@main
