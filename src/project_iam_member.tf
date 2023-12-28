@@ -10,5 +10,5 @@ resource "google_project_iam_member" "evros-oikolos" {
 
   project = google_project.master.project_id
   role    = each.value
-  member  = "serviceAccount:evros-oikolos@master-f44559.iam.gserviceaccount.com"
+  member  = "serviceAccount:${google_service_account.service_account.email}"
 }
