@@ -18,7 +18,6 @@ on:
         type: boolean
         description: terraform output
         default: false
-  workflow_call:
 env:
   TF_DIR: 'src'
   TF_VAR_billing_account: '${{ secrets.TF_VAR_billing_account }}'
