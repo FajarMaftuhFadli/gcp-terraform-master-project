@@ -3,7 +3,8 @@ locals {
     "cloudresourcemanager.googleapis.com",
     "serviceusage.googleapis.com",
     "iam.googleapis.com",
-    "cloudaicompanion.googleapis.com"
+    "cloudaicompanion.googleapis.com",
+    "cloudbilling.googleapis.com"
   ]
 }
 
