@@ -1,7 +1,8 @@
 locals {
   evros-oikolos-roles = [
     "roles/storage.admin",
-    "roles/iam.serviceAccountViewer"
+    "roles/iam.serviceAccountViewer",
+    "serviceusage.googleapis.com"
   ]
 }
 
