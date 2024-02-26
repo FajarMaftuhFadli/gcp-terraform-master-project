@@ -37,7 +37,7 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
       with:
-        terraform_version: "<1.7.0"
+        terraform_version: "~>1.7.0"
     - name: Cache Terraform provider
       uses: terraform-cache/terraform-cache@v1
     - name: Terraform Init
