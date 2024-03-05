@@ -4,7 +4,8 @@ locals {
     "serviceusage.googleapis.com",
     "iam.googleapis.com",
     "cloudaicompanion.googleapis.com",
-    "cloudbilling.googleapis.com"
+    "cloudbilling.googleapis.com",
+    "oslogin.googleapis.com"
   ]
 }
 
