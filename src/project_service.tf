@@ -5,7 +5,6 @@ locals {
     "iam.googleapis.com",
     "cloudaicompanion.googleapis.com",
     "cloudbilling.googleapis.com",
-    "oslogin.googleapis.com"
   ]
 }
 
